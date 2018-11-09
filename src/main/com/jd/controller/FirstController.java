@@ -5,6 +5,7 @@ import org.smart4j.framework.mvc.annotation.Request;
 import org.smart4j.framework.mvc.bean.Result;
 import org.smart4j.framework.mvc.bean.View;
 
+import java.util.Collections;
 import java.util.Date;
 
 /**
@@ -24,5 +25,22 @@ public class FirstController {
     public View hiJsp(){
         View view = new View("hello.jsp");
         return view;
+    }
+
+    @Request.Get(value = "/first/param.do")
+    public Result withParam(String param){
+        Result result = new Result(true);
+        System.out.println("=========" + param);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        String a = "abc";
+        System.out.println(a.hashCode());
+        System.out.println(hash(a.hashCode()));
+    }
+    public static int hash(int h){
+        h ^= (h >>> 20) ^ (h >>> 12);
+        return h ^ (h >>> 7) ^ (h >>> 4);
     }
 }
